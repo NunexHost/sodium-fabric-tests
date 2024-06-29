@@ -54,10 +54,10 @@ public class DefaultChunkRenderer extends ShaderChunkRenderer {
         shader.setModelViewMatrix(matrices.modelView());
 
         // Early out if no regions are available for this pass.
-        if (!renderLists.hasRegions(renderPass)) {
-            super.end(renderPass);
-            return;
-        }
+    //    if (!renderLists.hasRegions(renderPass)) {
+   //         super.end(renderPass);
+  //          return;
+ //       }
 
         Iterator<ChunkRenderList> iterator = renderLists.iterator(renderPass.isReverseOrder());
 
