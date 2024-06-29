@@ -53,6 +53,12 @@ public class DefaultChunkRenderer extends ShaderChunkRenderer {
         shader.setProjectionMatrix(matrices.projection());
         shader.setModelViewMatrix(matrices.modelView());
 
+        // Early out if no regions are available for this pass.
+        if (!renderLists.hasRegions(renderPass)) {
+            super.end(renderPass);
+            return;
+        }
+
         Iterator<ChunkRenderList> iterator = renderLists.iterator(renderPass.isReverseOrder());
 
         while (iterator.hasNext()) {
@@ -61,6 +67,7 @@ public class DefaultChunkRenderer extends ShaderChunkRenderer {
             var region = renderList.getRegion();
             var storage = region.getStorage(renderPass);
 
+            // Skip regions with no geometry.
             if (storage == null) {
                 continue;
             }
